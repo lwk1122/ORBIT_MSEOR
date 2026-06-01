@@ -1,0 +1,128 @@
+{
+  "description": "Small local OR/MSE fixtures inspired by ORQA, NL4OPT, and Mamo-style tasks. These are hand-written regression cases, not vendored benchmark data.",
+  "cases": [
+    {
+      "id": "nl4opt_component_capacity_001",
+      "source_style": "NL4OPT",
+      "task_type": "component_extraction",
+      "problem_text": "A factory chooses production quantity x to minimize total cost 3x while meeting demand of at least 10 units and capacity of at most 20 units.",
+      "gold_components": [
+        {
+          "component_type": "decision_variable",
+          "symbol": "x",
+          "natural_text": "production quantity x"
+        },
+        {
+          "component_type": "objective",
+          "symbol": "obj",
+          "natural_text": "minimize total cost 3x"
+        },
+        {
+          "component_type": "constraint",
+          "symbol": "demand",
+          "natural_text": "demand of at least 10 units"
+        },
+        {
+          "component_type": "constraint",
+          "symbol": "capacity",
+          "natural_text": "capacity of at most 20 units"
+        }
+      ]
+    },
+    {
+      "id": "mamo_solver_lp_001",
+      "source_style": "Mamo",
+      "task_type": "solver",
+      "problem_text": "Minimize x subject to x >= 1.",
+      "gold_solver": {
+        "status": "optimal",
+        "objective_value": 1.0,
+        "abs_tol": 1e-6,
+        "rel_tol": 1e-6
+      }
+    },
+    {
+      "id": "nl4opt_component_transport_002",
+      "source_style": "NL4OPT",
+      "task_type": "component_extraction",
+      "problem_text": "A planner ships units x_ij from warehouses i to stores j. Minimize shipping cost sum c_ij x_ij while each warehouse supply is not exceeded and every store demand is met.",
+      "gold_components": [
+        {
+          "component_type": "set",
+          "symbol": "i",
+          "natural_text": "warehouses i"
+        },
+        {
+          "component_type": "set",
+          "symbol": "j",
+          "natural_text": "stores j"
+        },
+        {
+          "component_type": "decision_variable",
+          "symbol": "x_ij",
+          "natural_text": "units shipped from warehouse i to store j"
+        },
+        {
+          "component_type": "parameter",
+          "symbol": "c_ij",
+          "natural_text": "shipping cost"
+        },
+        {
+          "component_type": "objective",
+          "symbol": "obj",
+          "natural_text": "minimize shipping cost sum c_ij x_ij"
+        },
+        {
+          "component_type": "constraint",
+          "symbol": "supply",
+          "natural_text": "warehouse supply is not exceeded"
+        },
+        {
+          "component_type": "constraint",
+          "symbol": "demand",
+          "natural_text": "every store demand is met"
+        }
+      ]
+    },
+    {
+      "id": "mamo_solver_infeasible_002",
+      "source_style": "Mamo",
+      "task_type": "solver",
+      "problem_text": "Minimize x subject to x >= 5 and x <= 2.",
+      "gold_solver": {
+        "status": "infeasible",
+        "objective_value": null,
+        "abs_tol": 1e-6,
+        "rel_tol": 1e-6
+      }
+    },
+    {
+      "id": "mamo_solver_binary_003",
+      "source_style": "Mamo",
+      "task_type": "solver",
+      "problem_text": "Maximize 5x subject to x <= 1 and x is binary.",
+      "gold_solver": {
+        "status": "optimal",
+        "objective_value": 5.0,
+        "abs_tol": 1e-6,
+        "rel_tol": 1e-6
+      }
+    },
+    {
+      "id": "orqa_retrieval_components_001",
+      "source_style": "ORQA",
+      "task_type": "retrieval",
+      "query": "Which source defines the demand constraint?",
+      "relevant_ids": [101, 103],
+      "k": 3
+    },
+    {
+      "id": "orqa_retrieval_solver_status_002",
+      "source_style": "ORQA",
+      "task_type": "retrieval",
+      "query": "Which evidence records the infeasible solver status?",
+      "relevant_ids": [201, 204],
+      "k": 4
+    }
+  ]
+}
